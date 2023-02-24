@@ -1,0 +1,7 @@
+C:\Tanulók\13d\13.d bangó alex\vizsgara\diakmunkaProjekt\diakmunkaProjekt\bin\Debug\diakmunkaProjekt.exe.config
+C:\Tanulók\13d\13.d bangó alex\vizsgara\diakmunkaProjekt\diakmunkaProjekt\bin\Debug\diakmunkaProjekt.exe
+C:\Tanulók\13d\13.d bangó alex\vizsgara\diakmunkaProjekt\diakmunkaProjekt\bin\Debug\diakmunkaProjekt.pdb
+C:\Tanulók\13d\13.d bangó alex\vizsgara\diakmunkaProjekt\diakmunkaProjekt\obj\Debug\diakmunkaProjekt.csprojAssemblyReference.cache
+C:\Tanulók\13d\13.d bangó alex\vizsgara\diakmunkaProjekt\diakmunkaProjekt\obj\Debug\diakmunkaProjekt.csproj.CoreCompileInputs.cache
+C:\Tanulók\13d\13.d bangó alex\vizsgara\diakmunkaProjekt\diakmunkaProjekt\obj\Debug\diakmunkaProjekt.exe
+C:\Tanulók\13d\13.d bangó alex\vizsgara\diakmunkaProjekt\diakmunkaProjekt\obj\Debug\diakmunkaProjekt.pdb
