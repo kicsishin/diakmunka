@@ -178,4 +178,14 @@ Content-Type: application/json
 
 ###______________SAJAT_______________
 
+###get students
 get http://localhost:3000/students
+
+###get studentsABC
+get http://localhost:3000/studentsABC
+
+###get employers
+get http://localhost:3000/employers
+
+###get employersABC
+get http://localhost:3000/employersABC

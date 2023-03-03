@@ -613,7 +613,70 @@ app.get("/students", (req, res) => {
     connection.release();
   });
 });
+
+app.get("/studentsABC", (req, res) => {
+  let sql = `
+  select * from students
+  order by name
+  `;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+
+    connection.query(sql, function (error, results, fields) {
+      sendingGet(res, error, results);
+    });
+
+    connection.release();
+  });
+});
+
 //#endregion students
+
+
+//#region employers
+app.get("/employers", (req, res) => {
+  let sql = `
+  select * from employers
+  `;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+
+    connection.query(sql, function (error, results, fields) {
+      sendingGet(res, error, results);
+    });
+
+    connection.release();
+  });
+});
+
+app.get("/employersABC", (req, res) => {
+  let sql = `
+  select * from employers
+  order by name
+  `;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+
+    connection.query(sql, function (error, results, fields) {
+      sendingGet(res, error, results);
+    });
+
+    connection.release();
+  });
+});
+//#endregion employers
 
 function mySanitizeHtml(data) {
   return sanitizeHtml(data, {
