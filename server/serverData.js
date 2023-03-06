@@ -634,6 +634,82 @@ app.get("/studentsABC", (req, res) => {
   });
 });
 
+app.get("/students/:id", (req, res) => {
+  const id = req.params.id;
+  let sql = `
+    SELECT * FROM students
+    WHERE id = ?`;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+    connection.query(sql, [id], async function (error, results, fields) {
+      if (error) {
+        const message = "students sql error";
+        sendingGetError(res, message);
+        return;
+      }
+      if (results.length == 0) {
+        const message = `Not found id: ${id}`;
+        sendingGetError(res, message);
+        return;
+      }
+      sendingGetById(res, null, results[0], id);
+    });
+    connection.release();
+  });
+});
+
+//students delete
+app.delete("/students/:id", (req, res) => {
+  const id = req.params.id;
+
+  let sql = `
+    DELETE FROM students
+    WHERE id = ?`;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+    connection.query(sql, [id], function (error, result, fields) {
+      sendingDelete(res, error, result, id);
+    });
+    connection.release();
+  });
+});
+
+//students post
+app.post("/students", (req, res) => {
+  const newR = {
+    id: sanitizeHtml(req.body.id),
+    name: sanitizeHtml(req.body.name),
+    datetime: +sanitizeHtml(req.body.datetime),
+  };
+  let sql = `
+    INSERT students
+    (id, name, datetime)
+    VALUES
+    (?, ?, ?)
+    `;
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+    connection.query(
+      sql,
+      [newR.id, newR.name, newR.datetime],
+      function (error, result, fields) {
+        sendingPost(res, error, result, newR);
+      }
+    );
+    connection.release();
+  });
+});
 //#endregion students
 
 

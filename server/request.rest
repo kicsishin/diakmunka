@@ -184,6 +184,20 @@ get http://localhost:3000/students
 ###get studentsABC
 get http://localhost:3000/studentsABC
 
+###get students by id
+get http://localhost:3000/students/9
+
+###delete students by id
+delete http://localhost:3000/students/9
+
+###post students 
+post http://localhost:3000/students
+Content-Type: application/json
+{
+     "id": 11,
+     "name": "Kozma Tibor",
+     "datetime": "1983-04-31T22:00:00.000Z"
+}
 ###get employers
 get http://localhost:3000/employers
 
