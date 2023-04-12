@@ -685,15 +685,14 @@ app.delete("/students/:id", (req, res) => {
 //students post
 app.post("/students", (req, res) => {
   const newR = {
-    id: sanitizeHtml(req.body.id),
     name: sanitizeHtml(req.body.name),
-    datetime: +sanitizeHtml(req.body.datetime),
+    datetime: sanitizeHtml(req.body.datetime),
   };
   let sql = `
-    INSERT students
-    (id, name, datetime)
+    INSERT INTO students
+    (name, datetime)
     VALUES
-    (?, ?, ?)
+    (?, ?)
     `;
   pool.getConnection(function (error, connection) {
     if (error) {
@@ -702,9 +701,40 @@ app.post("/students", (req, res) => {
     }
     connection.query(
       sql,
-      [newR.id, newR.name, newR.datetime],
+      [newR.name, newR.datetime],
       function (error, result, fields) {
         sendingPost(res, error, result, newR);
+      }
+    );
+    connection.release();
+  });
+});
+
+//students put
+app.put("/students/:id", (req, res) => {
+  const id = req.params.id;
+  const newR = {
+    name: sanitizeHtml(req.body.name),
+    datetime: sanitizeHtml(req.body.datetime),
+
+  };
+  let sql = `
+    UPDATE students SET
+    name = ?,
+    datetime = ?
+    WHERE id = ?
+      `;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+    connection.query(
+      sql,
+      [newR.name, newR.datetime, id],
+      function (error, result, fields) {
+        sendingPut(res, error, result, id, newR);
       }
     );
     connection.release();
@@ -752,6 +782,8 @@ app.get("/employersABC", (req, res) => {
     connection.release();
   });
 });
+
+
 //#endregion employers
 
 function mySanitizeHtml(data) {

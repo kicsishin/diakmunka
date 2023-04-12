@@ -188,18 +188,32 @@ get http://localhost:3000/studentsABC
 get http://localhost:3000/students/9
 
 ###delete students by id
-delete http://localhost:3000/students/9
+delete http://localhost:3000/students/12
 
 ###post students 
 post http://localhost:3000/students
 Content-Type: application/json
+
 {
-     "id": 11,
      "name": "Kozma Tibor",
      "datetime": "1983-04-31T22:00:00.000Z"
 }
+
+###put students
+put http://localhost:3000/students/14
+Content-Type: application/json
+
+{
+    "name": "Németh Rokkó",
+    "datetime": "1988-01-31T22:00:00.000Z"
+}
+
 ###get employers
 get http://localhost:3000/employers
 
 ###get employersABC
 get http://localhost:3000/employersABC
+
+###delete employers by id
+delete http://localhost:3000/employers/12
+
