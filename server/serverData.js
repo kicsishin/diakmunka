@@ -861,6 +861,9 @@ app.put("/employers/:id", (req, res) => {
 });
 //#endregion employers
 
+//#region projects
+
+//end#region projects
 function mySanitizeHtml(data) {
   return sanitizeHtml(data, {
     allowedTags: [],

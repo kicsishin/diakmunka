@@ -234,3 +234,30 @@ Content-Type: application/json
     "name": "kocsi Futárszolgálat",
     "settlement": "Cig Szög"
 }
+
+###get projects
+get http://localhost:3000/projects
+
+###get employersABC
+get http://localhost:3000/projectsABC
+
+###delete employers by id
+delete http://localhost:3000/projects/12
+
+###post employers
+post http://localhost:3000/projects
+Content-Type: application/json
+
+{
+     "name": "kocsi Futárszolgálat",
+     "settlement": "Kisfalu"
+}
+
+###put employers
+put http://localhost:3000/projects/12
+Content-Type: application/json
+
+{
+    "name": "kocsi Futárszolgálat",
+    "settlement": "Cig Szög"
+}
