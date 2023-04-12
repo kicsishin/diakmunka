@@ -217,3 +217,20 @@ get http://localhost:3000/employersABC
 ###delete employers by id
 delete http://localhost:3000/employers/12
 
+###post employers
+post http://localhost:3000/employers
+Content-Type: application/json
+
+{
+     "name": "kocsi Futárszolgálat",
+     "settlement": "Kisfalu"
+}
+
+###put employers
+put http://localhost:3000/employers/12
+Content-Type: application/json
+
+{
+    "name": "kocsi Futárszolgálat",
+    "settlement": "Cig Szög"
+}

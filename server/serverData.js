@@ -783,7 +783,82 @@ app.get("/employersABC", (req, res) => {
   });
 });
 
+app.delete("/employers/:id", (req, res) => {
+  const id = req.params.id;
 
+  let sql = `
+    DELETE FROM employers
+    WHERE id = ?`;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+    connection.query(sql, [id], function (error, result, fields) {
+      sendingDelete(res, error, result, id);
+    });
+    connection.release();
+  });
+});
+
+app.post("/employers", (req, res) => {
+  const newR = {
+    name: sanitizeHtml(req.body.name),
+    settlement: sanitizeHtml(req.body.settlement),
+  };
+  let sql = `
+    INSERT INTO employers
+    (name, settlement)
+    VALUES
+    (?, ?)
+    `;
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+    connection.query(
+      sql,
+      [newR.name, newR.settlement],
+      function (error, result, fields) {
+        sendingPost(res, error, result, newR);
+      }
+    );
+    connection.release();
+  });
+});
+
+//students put
+app.put("/employers/:id", (req, res) => {
+  const id = req.params.id;
+  const newR = {
+    name: sanitizeHtml(req.body.name),
+    settlement: sanitizeHtml(req.body.settlement),
+
+  };
+  let sql = `
+    UPDATE employers SET
+    name = ?,
+    settlement = ?
+    WHERE id = ?
+      `;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+    connection.query(
+      sql,
+      [newR.name, newR.settlement, id],
+      function (error, result, fields) {
+        sendingPut(res, error, result, id, newR);
+      }
+    );
+    connection.release();
+  });
+});
 //#endregion employers
 
 function mySanitizeHtml(data) {
