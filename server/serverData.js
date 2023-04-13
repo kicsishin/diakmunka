@@ -862,8 +862,140 @@ app.put("/employers/:id", (req, res) => {
 //#endregion employers
 
 //#region projects
+//get projects
+app.get("/projects", (req, res) => {
+  let sql = `
+  select * from projects
+  `;
 
-//end#region projects
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+
+    connection.query(sql, function (error, results, fields) {
+      sendingGet(res, error, results);
+    });
+
+    connection.release();
+  });
+});
+
+//get projectsABC
+app.get("/projectsABC", (req, res) => {
+  let sql = `
+  select * from projects
+  order by job
+  `;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+
+    connection.query(sql, function (error, results, fields) {
+      sendingGet(res, error, results);
+    });
+
+    connection.release();
+  });
+});
+
+//delete projects
+app.delete("/projects/:id", (req, res) => {
+  const id = req.params.id;
+
+  let sql = `
+    DELETE FROM projects
+    WHERE id = ?`;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+    connection.query(sql, [id], function (error, result, fields) {
+      sendingDelete(res, error, result, id);
+    });
+    connection.release();
+  });
+});
+
+//post projects
+app.post("/projects", (req, res) => {
+  const newR = {
+    employerid: req.body.employerid,
+    studentid: req.body.studentid,
+    job: sanitizeHtml(req.body.job),
+    date: sanitizeHtml(req.body.date),
+    hourlyrate: req.body.hourlyrate,
+    numberofhours: req.body.numberofhours,
+    highschoolstudent: req.body.highschoolstudent,
+  };
+  let sql = `
+    INSERT INTO projects
+    (employerid, studentid, job, date, hourlyrate, numberofhours, highschoolstudent)
+    VALUES
+    (?, ?, ?, ?, ?, ?, ?)
+    `;
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+    connection.query(
+      sql,
+      [newR.employerid, newR.studentid, newR.job, newR.date, newR.hourlyrate, newR.numberofhours, newR.highschoolstudent],
+      function (error, result, fields) {
+        sendingPost(res, error, result, newR);
+      }
+    );
+    connection.release();
+  });
+});
+
+//put projects
+app.put("/projects/:id", (req, res) => {
+  const id = req.params.id;
+  const newR = {
+    employerid: req.body.employerid,
+    studentid: req.body.studentid,
+    job: sanitizeHtml(req.body.job),
+    date: sanitizeHtml(req.body.date),
+    hourlyrate: req.body.hourlyrate,
+    numberofhours: req.body.numberofhours,
+    highschoolstudent: req.body.highschoolstudent,
+  };
+  let sql = `
+    UPDATE projects SET
+    employerid = ?, 
+    studentid = ?, 
+    job = ?, 
+    date = ?, 
+    hourlyrate = ?,
+    numberofhours = ?, 
+    highschoolstudent = ?
+    WHERE id = ?
+    `;
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+    connection.query(
+      sql,
+      [newR.employerid, newR.studentid, newR.job, newR.date, newR.hourlyrate, newR.numberofhours, newR.highschoolstudent, id],
+      function (error, result, fields) {
+        sendingPost(res, error, result, newR, id);
+      }
+    );
+    connection.release();
+  });
+});
+
+//#endregion projects
 function mySanitizeHtml(data) {
   return sanitizeHtml(data, {
     allowedTags: [],

@@ -215,7 +215,7 @@ get http://localhost:3000/employers
 get http://localhost:3000/employersABC
 
 ###delete employers by id
-delete http://localhost:3000/employers/12
+delete http://localhost:3000/employers/13
 
 ###post employers
 post http://localhost:3000/employers
@@ -227,7 +227,7 @@ Content-Type: application/json
 }
 
 ###put employers
-put http://localhost:3000/employers/12
+put http://localhost:3000/employers/13
 Content-Type: application/json
 
 {
@@ -242,22 +242,32 @@ get http://localhost:3000/projects
 get http://localhost:3000/projectsABC
 
 ###delete employers by id
-delete http://localhost:3000/projects/12
+delete http://localhost:3000/projects/125
 
 ###post employers
 post http://localhost:3000/projects
 Content-Type: application/json
 
 {
-     "name": "kocsi Futárszolgálat",
-     "settlement": "Kisfalu"
+      "employerid": 3,
+      "studentid": 2,
+      "job": "plug",
+      "date": "2006-07-01T22:00:00.000Z",
+      "hourlyrate": 420,
+      "numberofhours": 2,
+      "highschoolstudent": 1
 }
 
-###put employers
-put http://localhost:3000/projects/12
+###put projects
+put http://localhost:3000/projects/125
 Content-Type: application/json
 
 {
-    "name": "kocsi Futárszolgálat",
-    "settlement": "Cig Szög"
+      "employerid": 3,
+      "studentid": 2,
+      "job": "kabitozo",
+      "date": "2006-07-01T22:00:00.000Z",
+      "hourlyrate": 420,
+      "numberofhours": 2,
+      "highschoolstudent": 1
 }
