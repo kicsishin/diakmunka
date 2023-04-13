@@ -40,7 +40,7 @@ const router = createRouter({
       name: "employers",
       component: () => import("../views/Employers.vue"),
       meta: {
-        requiresAuth: false,
+        requiresAuth: true,
         title: "Employers / Employer",
       },
     },

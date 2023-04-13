@@ -2,12 +2,30 @@
 <template>
   <div>
     <h1>Students</h1>
-    <div v-for="(student, index) in students" :key="`student${index}`">
-      <h2>
-        {{ student.name }} {{ student.datetime }} 
-      </h2>
-    </div>
+
+    <div>
+      <table class="table w-auto">
+        <thead>
+          <tr >
+            <th scope="col"><button type="button" class="btn btn-sm btn-outline-success">New</button></th>
+            <th scope="col">Name</th>
+          <th scope="col">Date Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(student, index) in students" :key="`student${index}`">
+          <td>
+            <button type="button" class="btn btn-sm btn-outline-primary m-2"><i class="bi bi-pencil"></i></button>
+            <button type="button" class="btn btn-sm btn-outline-danger m-1"><i class="bi bi-trash"></i></button>
+          </td>
+          <td> {{ student.name }}</td>
+          <td> {{ student.datetime }} </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+</div>
 </template>
 
 <script>
@@ -46,4 +64,14 @@ export default {
 
 
 <style>
+th, td{
+  text-align: center;
+  vertical-align: middle;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+h1, table{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  background-color: antiquewhite;
+}
 </style>
