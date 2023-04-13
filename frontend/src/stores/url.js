@@ -16,32 +16,41 @@ export const useUrlStore = defineStore({
     urlToken() {
       return `${this.urlAuth}/token`;
     },
-    urlCars(){
-      return `${this.urlData}/cars`
+    // urlCars(){
+    //   return `${this.urlData}/cars`
+    // },
+    // urlCarsWithTrips(){
+    //   return `${this.urlData}/carsWithTrips`
+    // },
+    // urlCarsTrips(){
+    //   return `${this.urlData}/carsTrips`
+    // },
+    // urlCarsWithDrivers(){
+    //   return `${this.urlData}/carsWithDrivers`
+    // },
+    // urlCarsWithDriversReal(){
+    //   return `${this.urlData}/carsWithDriversReal`
+    // },
+    // urlDriversAbc(){
+    //   return `${this.urlData}/driversAbc`
+    // },
+    // urlFreeDriversAbc(){
+    //   return `${this.urlData}/freeDriversAbc`
+    // },
+    // urlTripsByCarId(){
+    //   return `${this.urlData}/tripsByCarId`
+    // },
+    // urlTrips(){
+    //   return `${this.urlData}/trips`
+    // }
+    urlStudents() {
+      return `${this.urlData}/students`;
     },
-    urlCarsWithTrips(){
-      return `${this.urlData}/carsWithTrips`
+    urlEmployers() {
+      return `${this.urlData}/employers`;
     },
-    urlCarsTrips(){
-      return `${this.urlData}/carsTrips`
+    urlProjects() {
+      return `${this.urlData}/projects`;
     },
-    urlCarsWithDrivers(){
-      return `${this.urlData}/carsWithDrivers`
-    },
-    urlCarsWithDriversReal(){
-      return `${this.urlData}/carsWithDriversReal`
-    },
-    urlDriversAbc(){
-      return `${this.urlData}/driversAbc`
-    },
-    urlFreeDriversAbc(){
-      return `${this.urlData}/freeDriversAbc`
-    },
-    urlTripsByCarId(){
-      return `${this.urlData}/tripsByCarId`
-    },
-    urlTrips(){
-      return `${this.urlData}/trips`
-    }
   },
 });

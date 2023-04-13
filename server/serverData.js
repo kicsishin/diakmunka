@@ -77,9 +77,9 @@ app.post("/users", (req, res) => {
     userName: mySanitizeHtml(req.body.userName),
     email: mySanitizeHtml(req.body.email),
     password: req.body.password,
-    number: +mySanitizeHtml(req.body.number),
+    number: req.body.number,
   };
-
+console.log(newR);
   //user ellenőrzés
   let sql = `select count(*) countUserEmail from users where userName = ?
     UNION all
@@ -115,7 +115,7 @@ app.post("/users", (req, res) => {
         }
         //mehet a regisztráció
 
-        sql = `insert into users
+        sql = `INSERT INTO users
       (firstName, lastName, gender, userName, email, password, number)
       values
       (?,?,?,?,?,?,?)

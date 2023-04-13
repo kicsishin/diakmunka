@@ -5,9 +5,9 @@
 </template>
 
 <script setup>
-import Counter from "@/components/Counter.vue";
-import { useCounterStore } from "@/stores/counter";
-const storeCounter = useCounterStore();
+// import Counter from "@/components/Counter.vue";
+// import { useCounterStore } from "@/stores/counter";
+// const storeCounter = useCounterStore();
 </script>
 
 <style>

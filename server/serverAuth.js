@@ -6,13 +6,24 @@ const jwt = require("jsonwebtoken");
 const pool = require("./config/database.js");
 const { genSaltSync, hashSync, compareSync } = require("bcrypt");
 
+const cors = require("cors");
 const {
   sendingInfo
 } = require("./config/sending.js");
 
 
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: "*", //http://localhost:8080
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  })
+);
+
 //itt tároljuk a refrest tokeneket
+
+
 refreshTokens = [];
 
 // A bejelenkezés

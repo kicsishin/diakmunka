@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/"
         @click="onClickMenu(1)"
-      >Taxi</router-link>
+      ><i class="bi bi-mortarboard"></i></router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -40,29 +40,31 @@
               :class="{active: menuState === 4}"
               @click="onClickMenu(4)"
             >
-              Taxiállomás
+            <i class="bi bi-arrow-down-circle-fill"></i>
             </a>
             <ul class="dropdown-menu">
               <li>
-                <router-link class="dropdown-item" to="/taxiFuvarjai"
-                  >Taxi és fuvarjai</router-link
+                <router-link class="dropdown-item" to="/projects"
+                  >Projects</router-link
                 >
               </li>
               <li><hr class="dropdown-divider" /></li>
               <li>
-                <router-link class="dropdown-item" to="/taxiKezeles"
-                  :class="{ disabled: !storeLogin.loginSuccess }"
-                  >Taxik kezelése</router-link
+                <router-link class="dropdown-item" to="/students"
+                  >Students</router-link
                 >
               </li>
               <li>
-                <router-link class="dropdown-item" to="/fuvarBevitel"
-                  >Fuvar bevitel</router-link
+                <router-link class="dropdown-item" to="/employers"
+                  >Employers</router-link
                 >
               </li>
             </ul>
           </li>
-          <li class="nav-item dropdown">
+          <!-- 
+            loginhoz kotott class = :class="{ disabled: !storeLogin.loginSuccess }"
+            
+            <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -71,8 +73,8 @@
               aria-expanded="false"
             >
               Counter
-            </a>
-            <ul class="dropdown-menu">
+            </a> -->
+            <!-- <ul class="dropdown-menu">
               <li>
                 <router-link class="dropdown-item" to="/count1"
                   :class="{active: menuState === 5}"
@@ -87,8 +89,8 @@
                   >Counter2</router-link
                 >
               </li>
-            </ul>
-          </li>
+            </ul> -->
+          <!-- </li> -->
           <li class="nav-item" v-if="!storeLogin.loginSuccess">
             <router-link class="nav-link" to="/login">Login</router-link>
           </li>

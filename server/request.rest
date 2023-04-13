@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
     "userName": "feri",
-    "password": "jozsi123"
+    "password": "123"
 }
 
 ### token kérés
@@ -37,17 +37,18 @@ get http://localhost:3000/users/15
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjEsImZpcnN0TmFtZSI6IkLDqWxhIiwibGFzdE5hbWUiOiJOYWd5b24iLCJnZW5kZXIiOiJmw6lyZmkiLCJlbWFpbCI6Im5hZ3kuYmVsYUBnbWFpbC5jb20iLCJudW1iZXIiOjM0MzQzNTUzNH0sImlhdCI6MTY0NDMxNTE5NCwiZXhwIjoxNjQ0MzE4Nzk0fQ.q2ih8UiVs51Pa3UEc908O6tLt5Upl9NOlidEmQSksMQ
 
 ### User hozzáadása (regisztráció)
+### alex, 123
 post http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "firstName": "h",
-    "lastName": "Fehér",
+    "firstName": "bango",
+    "lastName": "alex",
     "gender": "férfi",
-    "userName": "h1",
-    "email": "feher.h1@gmail.com",
-    "password": "jozsi123",
-    "number": 33333333
+    "userName": "alex",
+    "email": "bango.alex@gmail.com",
+    "password": "123",
+    "number": 1
 }
 
 ### User módosítása
