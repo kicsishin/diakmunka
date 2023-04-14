@@ -135,6 +135,7 @@
 </template>
 
 <script>
+import * as bootstrap from "bootstrap";
 import { useUrlStore } from "@/stores/url";
 import { useLoginStore } from "@/stores/login";
 const storeUrl = useUrlStore();
@@ -163,6 +164,16 @@ export default {
       const response = await fetch(url, config);
       const data = await response.json();
       this.students = data.data;
+    },
+  },
+  
+  computed: {
+    stateTitle() {
+      if (this.state === "new") {
+        return "Új Diak bevitele";
+      } else if (this.state === "edit") {
+        return "Diak módosítása";
+      }
     },
   },
 };
