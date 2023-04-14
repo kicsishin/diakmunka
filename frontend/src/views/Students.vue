@@ -54,7 +54,7 @@
 
       <div
         class="modal fade"
-        id="modalCar"
+        id="modalStudent"
         tabindex="-1"
         aria-labelledby="modalCarModalLabel"
         aria-hidden="true"
@@ -80,7 +80,7 @@
               <form class="row g-3 needs-validation" novalidate>
                 <!-- Autó név -->
                 <div class="col-md-12">
-                  <label for="name" class="form-label">Autó név</label>
+                  <label for="name" class="form-label">Student name</label>
                   <input
                     type="text"
                     class="form-control"
@@ -93,7 +93,7 @@
 
                 <!-- Rendszám -->
                 <div class="col-md-6">
-                  <label for="licenceNumber" class="form-label">Rendszám</label>
+                  <label for="licenceNumber" class="form-label">Datetime</label>
                   <input
                     type="text"
                     class="form-control"
@@ -102,56 +102,8 @@
                     v-model="editableCar.licenceNumber"
                   />
                   <div class="invalid-feedback">
-                    A rendszám kitöltése kötelező
+                    A szuletesi datum kitöltése kötelező
                   </div>
-                </div>
-
-                <!-- Rendszám -->
-                <div class="col-md-6">
-                  <label for="hourlyRate" class="form-label"
-                    >Tarifa (Ft/óra)</label
-                  >
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="hourlyRate"
-                    required
-                    v-model="editableCar.hourlyRate"
-                  />
-                  <div class="invalid-feedback">
-                    A tarifa kitöltése kötelező
-                  </div>
-                </div>
-
-                <!-- out of traffic -->
-                <div class="col-md-6">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="outOfTraffic"
-                    v-model="editableCar.outOfTraffic"
-                  />
-                  <label class="form-check-label ms-2" for="flexCheckDefault">
-                    Forgalmon kívül
-                  </label>
-                </div>
-
-                <div class="col-md-6">
-                  <select
-                    class="form-select"
-                    aria-label="Default select example"
-                    v-model="editableCar.driverId"
-                  >
-                    <option :value="null">Nincs sofőr</option>
-                    <option
-                      v-for="(driver, index) in driversAbc"
-                      :key="`op${index}`"
-                      :value="driver.id"
-                    >
-                      {{ driver.driverName }}
-                    </option>
-                  </select>
                 </div>
               </form>
               <!--#endregion Form -->
