@@ -740,6 +740,29 @@ app.put("/students/:id", (req, res) => {
     connection.release();
   });
 });
+
+app.get("/freeStudentsAbc", (req, res) => {
+  let sql = `SELECT s.id, s.name from students s
+      LEFT JOIN projects p on s.id = p.studentid
+      WHERE p.studentid is NULL
+    ORDER BY s.name`;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+    connection.query(sql, async function (error, results, fields) {
+      if (error) {
+        message = "diakmunka sql error";
+        sendingGetError(res, message);
+        return;
+      }
+      sendingGet(res, null, results);
+    });
+    connection.release();
+  });
+});
 //#endregion students
 
 

@@ -45,18 +45,16 @@
           </tr>
         </tbody>
       </table>
-
       <!-- modal -->
       <!-- Button trigger modal -->
       <!-- <button type="button" class="btn btn-primary" >
   Launch demo modal
 </button> -->
-
       <div
         class="modal fade"
         id="modalStudent"
         tabindex="-1"
-        aria-labelledby="modalCarModalLabel"
+        aria-labelledby="modalStudentModalLabel"
         aria-hidden="true"
       >
         <div class="modal-dialog">
@@ -86,20 +84,20 @@
                     class="form-control"
                     id="name"
                     required
-                    v-model="editableCar.name"
+                    v-model="editableStudent.name"
                   />
                   <div class="invalid-feedback">A név kitöltése kötelező</div>
                 </div>
 
                 <!-- Rendszám -->
                 <div class="col-md-6">
-                  <label for="licenceNumber" class="form-label">Datetime</label>
+                  <label for="datetime" class="form-label">Datetime</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="licenceNumber"
+                    id="datetime"
                     required
-                    v-model="editableCar.licenceNumber"
+                    v-model="editableStudent.datetime"
                   />
                   <div class="invalid-feedback">
                     A szuletesi datum kitöltése kötelező
@@ -140,16 +138,41 @@ import { useUrlStore } from "@/stores/url";
 import { useLoginStore } from "@/stores/login";
 const storeUrl = useUrlStore();
 const storeLogin = useLoginStore();
+
+class Student {
+  constructor(
+    id = 0,
+    name = null,
+    datetime = null,
+    
+  ) {
+    this.id = id;
+    this.name = name;
+    this.datetime = datetime;
+  }
+}
+
 export default {
   data() {
     return {
       storeUrl,
       storeLogin,
       students: [],
+      editableStudent: new Student(),
+      modal: null,
+      form: null,
+      state: "view",
+      currentId: null,
+      studentsABC: [],
     };
   },
   mounted() {
     this.getStudents();
+    this.getFreeStudentsAbc();
+    this.modal = new bootstrap.Modal(document.getElementById("modalStudent"), {
+      keyboard: false,
+    });
+    this.form = document.querySelector(".needs-validation");
   },
   methods: {
     async getStudents() {
@@ -165,6 +188,120 @@ export default {
       const data = await response.json();
       this.students = data.data;
     },
+
+    async getStudentById(id) {
+      let url = `${this.storeUrl.urlStudents}/${id}`;
+      const config = {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${this.storeLogin.accessToken}`,
+        },
+      };
+      const response = await fetch(url, config);
+      const data = await response.json();
+      this.editableStudent = data.data;
+    },
+    async postStudent() {
+      let url = this.storeUrl.urlStudent;
+      const body = JSON.stringify(this.editableStudent);
+      const config = {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${this.storeLogin.accessToken}`,
+        },
+        body: body,
+      };
+      const response = await fetch(url, config);
+      this.getStudents();
+    },
+    async putStudent() {
+      const id = this.editableStudent.id;
+      let url = `${this.storeUrl.urlStudent}/${id}`;
+      const body = JSON.stringify(this.editableStudent);
+      const config = {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${this.storeLogin.accessToken}`,
+        },
+        body: body,
+      };
+      const response = await fetch(url, config);
+      this.getStudents();
+    },
+    async getFreeStudentsAbc() {
+      let url = this.storeUrl.urlFreeStudentsAbc;
+      const config = {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${this.storeLogin.accessToken}`,
+        },
+      };
+      const response = await fetch(url, config);
+      const data = await response.json();
+      this.studentsABC = data.data;
+    },
+
+    async deleteStudent(id) {
+      let url = `${this.storeUrl.urlStudent}/${id}`;
+      const config = {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${this.storeLogin.accessToken}`,
+        },
+      };
+      const response = await fetch(url, config);
+      this.getStudents();
+    },
+    onClikRow(id) {
+      this.currentId = id;
+    },
+    onClickNew() {
+      this.state = "new";
+      this.currentId = null;
+      this.editableStudent = new Student();
+      this.modal.show();
+    },
+    onClickDelete(id) {
+      this.state = "delete";
+      this.deleteStudent(id);
+      this.currentId = null;
+    },
+    onClickEdit(id) {
+      this.state = "edit";
+      this.getStudentsById(id);
+      this.getFreeStudentsAbc();
+      this.modal.show();
+    },
+    onClickCancel() {
+      this.editableStudent = new Student();
+      this.modal.hide();
+    },
+    onClickSave() {
+      this.form.classList.add("was-validated");
+      if (this.form.checkValidity()) {
+        if (this.state == "edit") {
+          //put
+          this.putStudent();
+          // this.modal.hide();
+        } else if (this.state == "new") {
+          //post
+          this.postStudent();
+          // this.modal.hide();
+        }
+        this.modal.hide();
+        //frissíti a taxisok listáját
+        this.getFreeStudentsAbc()
+      }
+    },
+    currentRowBackground(id) {
+      return this.currentId == id ? "my-bg-current-row" : "";
+    },
+    // outOfTrafficName(outOfTraffic) {
+    //   return outOfTraffic ? "igen" : "nem";
+    // },
   },
   
   computed: {

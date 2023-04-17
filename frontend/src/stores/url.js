@@ -52,5 +52,8 @@ export const useUrlStore = defineStore({
     urlProjects() {
       return `${this.urlData}/projects`;
     },
+    urlFreeStudentsAbc(){
+      return `${this.urlData}/freeStudentsAbc`
+    },
   },
 });

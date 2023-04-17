@@ -74,6 +74,9 @@ delete http://localhost:3000/users/17
 ###get students
 get http://localhost:3000/students
 
+### get freeStudentsAbc 
+get http://localhost:3000/freeStudentsAbc
+
 ###get studentsABC
 get http://localhost:3000/studentsABC
 
