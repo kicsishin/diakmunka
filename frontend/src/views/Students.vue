@@ -159,7 +159,7 @@ export default {
       storeLogin,
       students: [],
       editableStudent: new Student(),
-      modal: null,
+      modalStudent: null,
       form: null,
       state: "view",
       currentId: null,
@@ -169,7 +169,7 @@ export default {
   mounted() {
     this.getStudents();
     this.getFreeStudentsAbc();
-    this.modal = new bootstrap.Modal(document.getElementById("modalStudent"), {
+    this.modalStudent = new bootstrap.Modal(document.getElementById("modalStudent"), {
       keyboard: false,
     });
     this.form = document.querySelector(".needs-validation");
@@ -177,7 +177,6 @@ export default {
   methods: {
     async getStudents() {
       let url = this.storeUrl.urlStudents;
-      console.log(url);
       const config = {
         method: "GET",
         headers: {
@@ -202,7 +201,7 @@ export default {
       this.editableStudent = data.data;
     },
     async postStudent() {
-      let url = this.storeUrl.urlStudent;
+      let url = this.storeUrl.urlStudents;
       const body = JSON.stringify(this.editableStudent);
       const config = {
         method: "POST",
@@ -217,7 +216,7 @@ export default {
     },
     async putStudent() {
       const id = this.editableStudent.id;
-      let url = `${this.storeUrl.urlStudent}/${id}`;
+      let url = `${this.storeUrl.urlStudents}/${id}`;
       const body = JSON.stringify(this.editableStudent);
       const config = {
         method: "PUT",
@@ -244,7 +243,7 @@ export default {
     },
 
     async deleteStudent(id) {
-      let url = `${this.storeUrl.urlStudent}/${id}`;
+      let url = `${this.storeUrl.urlStudents}/${id}`;
       const config = {
         method: "DELETE",
         headers: {
@@ -260,24 +259,23 @@ export default {
     },
     onClickNew() {
       this.state = "new";
-      this.currentId = null;
       this.editableStudent = new Student();
-      this.modal.show();
+      this.getStudents()
+      this.modalStudent.show();
     },
     onClickDelete(id) {
       this.state = "delete";
       this.deleteStudent(id);
-      this.currentId = null;
     },
     onClickEdit(id) {
       this.state = "edit";
-      this.getStudentsById(id);
+      this.getStudentById(id);
       this.getFreeStudentsAbc();
-      this.modal.show();
+      this.modalStudent.show();
     },
     onClickCancel() {
       this.editableStudent = new Student();
-      this.modal.hide();
+      this.modalStudent.hide();
     },
     onClickSave() {
       this.form.classList.add("was-validated");
@@ -291,7 +289,7 @@ export default {
           this.postStudent();
           // this.modal.hide();
         }
-        this.modal.hide();
+        this.modalStudent.hide();
         //frissíti a taxisok listáját
         this.getFreeStudentsAbc()
       }
