@@ -597,7 +597,7 @@ app.put("/trips/:id", (req, res) => {
 //#region students
 app.get("/students", (req, res) => {
   let sql = `
-  select * from students
+  SELECT id, name,  DATE_FORMAT(datetime, '%Y.%m.%e') datetime FROM students
   `;
 
   pool.getConnection(function (error, connection) {
@@ -765,8 +765,8 @@ app.get("/freeStudentsAbc", (req, res) => {
 });
 //#endregion students
 
-
 //#region employers
+
 app.get("/employers", (req, res) => {
   let sql = `
   select * from employers
@@ -888,7 +888,14 @@ app.put("/employers/:id", (req, res) => {
 //get projects
 app.get("/projects", (req, res) => {
   let sql = `
-  select * from projects
+  select id,
+  employerid,
+  studentid,
+  job,
+  DATE_FORMAT(date, '%Y-%m-%e %H:%i:%s') date,
+  hourlyrate,
+  numberofhours,
+  highschoolstudent from projects
   `;
 
   pool.getConnection(function (error, connection) {
@@ -1019,6 +1026,29 @@ app.put("/projects/:id", (req, res) => {
 });
 
 //#endregion projects
+
+//#SPE
+app.get("/spes", (req, res) => {
+  let sql = `
+  SELECT s.id sid, s.name sname, DATE_FORMAT(s.datetime, '%Y.%m.%e %H:%i:%s') datetime, p.id pid, p.employerid, p.studentid, p.job, p.date, p.hourlyrate, p.numberofhours, p.highschoolstudent, e.id eid, e.name ename, e.settlement FROM students s
+  INNER JOIN projects p on s.id = p.studentid
+  INNER JOIN employers e on p.employerid = e.id
+  `;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+
+    connection.query(sql, function (error, results, fields) {
+      sendingGet(res, error, results);
+    });
+
+    connection.release();
+  });
+});
+
 function mySanitizeHtml(data) {
   return sanitizeHtml(data, {
     allowedTags: [],

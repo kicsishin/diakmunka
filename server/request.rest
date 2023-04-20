@@ -167,3 +167,6 @@ Content-Type: application/json
       "numberofhours": 2,
       "highschoolstudent": 1
 }
+
+###get SPE (students, projects, employers)
+get http://localhost:3000/spes

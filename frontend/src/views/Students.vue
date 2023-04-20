@@ -76,7 +76,6 @@
               <!--#region Form -->
 
               <form class="row g-3 needs-validation" novalidate>
-                <!-- Autó név -->
                 <div class="col-md-12">
                   <label for="name" class="form-label">Student name</label>
                   <input
@@ -89,11 +88,10 @@
                   <div class="invalid-feedback">A név kitöltése kötelező</div>
                 </div>
 
-                <!-- Rendszám -->
                 <div class="col-md-6">
                   <label for="datetime" class="form-label">Datetime</label>
                   <input
-                    type="datetime-local"
+                    type="date"
                     class="form-control"
                     id="datetime"
                     required
@@ -154,7 +152,7 @@ export default {
       storeLogin,
       students: [],
       editableStudent: new Student(),
-      modalStudent: null,
+      modal: null,
       form: null,
       state: "view",
       currentId: null,
@@ -164,7 +162,7 @@ export default {
   mounted() {
     this.getStudents();
     this.getFreeStudentsAbc();
-    this.modalStudent = new bootstrap.Modal(
+    this.modal = new bootstrap.Modal(
       document.getElementById("modalStudent"),
       {
         keyboard: false,
@@ -259,7 +257,7 @@ export default {
       this.state = "new";
       this.editableStudent = new Student();
       this.getStudents();
-      this.modalStudent.show();
+      this.modal.show();
     },
     onClickDelete(id) {
       this.state = "delete";
@@ -269,11 +267,11 @@ export default {
       this.state = "edit";
       this.getStudentById(id);
       this.getFreeStudentsAbc();
-      this.modalStudent.show();
+      this.modal.show();
     },
     onClickCancel() {
       this.editableStudent = new Student();
-      this.modalStudent.hide();
+      this.modal.hide();
     },
     onClickSave() {
       this.form.classList.add("was-validated");
@@ -287,7 +285,7 @@ export default {
           this.postStudent();
           // this.modal.hide();
         }
-        this.modalStudent.hide();
+        this.modal.hide();
         //frissíti a taxisok listáját
         this.getFreeStudentsAbc();
       }

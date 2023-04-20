@@ -117,7 +117,7 @@ COLLATE utf8_hungarian_ci;
 -- 
 -- Dumping data for table students
 --
-INSERT INTO students VALUES
+INSERT INTO students VALUES 
 (1, 'Kos Péter', '1987-11-05 00:00:00'),
 (2, 'Port Imre', '1990-05-05 00:00:00'),
 (3, 'Kovács Imre', '1984-03-02 00:00:00'),

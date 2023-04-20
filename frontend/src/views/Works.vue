@@ -1,49 +1,47 @@
 
 <template>
   <div>
-    <h1>Employers</h1>
-    <!-- tablazat -->
+    <h1>Ready to work</h1>
+
     <div>
       <table class="table w-auto">
         <thead>
-          <tr >
+          <tr>
             <th scope="col">Name</th>
-          <th scope="col">Settlement</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(employer, index) in employers" :key="`employer${index}`">
-          
-          <td> {{ employer.name }}</td>
-          <td> {{ employer.settlement }} </td>
-        </tr>
-      </tbody>
-    </table>
-
-  </div>
+            <th scope="col">Date Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(spe, index) in spes" :key="`spe${index}`">
+            <td>{{ spe.sname }}</td>
+            <td>{{ spe.datetime }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
-<script >
+<script>
 import { useUrlStore } from "@/stores/url";
 import { useLoginStore } from "@/stores/login";
 const storeUrl = useUrlStore();
 const storeLogin = useLoginStore();
+
 export default {
   data() {
     return {
       storeUrl,
       storeLogin,
-      employers: [],
+      spes: [],
     };
   },
   mounted() {
-    this.getEmployers();
+    this.getSPE();
   },
   methods: {
-    async getEmployers() {
-      let url = this.storeUrl.urlEmployers;
-      console.log(url);
+    async getSPE() {
+      let url = this.storeUrl.urlSPE;
       const config = {
         method: "GET",
         headers: {
@@ -52,10 +50,13 @@ export default {
       };
       const response = await fetch(url, config);
       const data = await response.json();
-      this.employers = data.data;
+      this.spes = data.data;
+      console.log(spes);
     },
-  },
-};
+}
+}
+
+  
 </script>
 
 

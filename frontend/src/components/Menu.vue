@@ -59,6 +59,11 @@
                   >Employers</router-link
                 >
               </li>
+              <li>
+                <router-link class="dropdown-item" to="/spes"
+                  >Works</router-link
+                >
+              </li>
             </ul>
           </li>
           <!-- 

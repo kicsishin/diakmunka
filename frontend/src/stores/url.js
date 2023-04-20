@@ -46,6 +46,9 @@ export const useUrlStore = defineStore({
     urlStudents() {
       return `${this.urlData}/students`;
     },
+    urlSPE() {
+      return `${this.urlData}/spes`;
+    },
     urlEmployers() {
       return `${this.urlData}/employers`;
     },
