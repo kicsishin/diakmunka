@@ -93,7 +93,7 @@
                 <div class="col-md-6">
                   <label for="datetime" class="form-label">Datetime</label>
                   <input
-                    type="text"
+                    type="datetime-local"
                     class="form-control"
                     id="datetime"
                     required
@@ -140,12 +140,7 @@ const storeUrl = useUrlStore();
 const storeLogin = useLoginStore();
 
 class Student {
-  constructor(
-    id = 0,
-    name = null,
-    datetime = null,
-    
-  ) {
+  constructor(id = 0, name = null, datetime = null) {
     this.id = id;
     this.name = name;
     this.datetime = datetime;
@@ -169,9 +164,12 @@ export default {
   mounted() {
     this.getStudents();
     this.getFreeStudentsAbc();
-    this.modalStudent = new bootstrap.Modal(document.getElementById("modalStudent"), {
-      keyboard: false,
-    });
+    this.modalStudent = new bootstrap.Modal(
+      document.getElementById("modalStudent"),
+      {
+        keyboard: false,
+      }
+    );
     this.form = document.querySelector(".needs-validation");
   },
   methods: {
@@ -260,7 +258,7 @@ export default {
     onClickNew() {
       this.state = "new";
       this.editableStudent = new Student();
-      this.getStudents()
+      this.getStudents();
       this.modalStudent.show();
     },
     onClickDelete(id) {
@@ -291,7 +289,7 @@ export default {
         }
         this.modalStudent.hide();
         //frissíti a taxisok listáját
-        this.getFreeStudentsAbc()
+        this.getFreeStudentsAbc();
       }
     },
     currentRowBackground(id) {
@@ -301,7 +299,7 @@ export default {
     //   return outOfTraffic ? "igen" : "nem";
     // },
   },
-  
+
   computed: {
     stateTitle() {
       if (this.state === "new") {
