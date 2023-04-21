@@ -14,7 +14,7 @@
         <tbody>
           <tr v-for="(spe, index) in spes" :key="`spe${index}`">
             <td>{{ spe.sname }}</td>
-            <td>{{ spe.datetime }}</td>
+            <td>{{ spe.ename }}</td>
           </tr>
         </tbody>
       </table>
