@@ -5,3 +5,10 @@ C:\Tanulók\13d\13.d bangó alex\vizsgara\diakmunkaProjekt\diakmunkaProjekt\obj\
 C:\Tanulók\13d\13.d bangó alex\vizsgara\diakmunkaProjekt\diakmunkaProjekt\obj\Debug\diakmunkaProjekt.csproj.CoreCompileInputs.cache
 C:\Tanulók\13d\13.d bangó alex\vizsgara\diakmunkaProjekt\diakmunkaProjekt\obj\Debug\diakmunkaProjekt.exe
 C:\Tanulók\13d\13.d bangó alex\vizsgara\diakmunkaProjekt\diakmunkaProjekt\obj\Debug\diakmunkaProjekt.pdb
+C:\Users\B18\Documents\Bangó Alex vizsgaremelk\diakmunka\document_db\diakmunkaProjekt\diakmunkaProjekt\bin\Debug\diakmunkaProjekt.exe.config
+C:\Users\B18\Documents\Bangó Alex vizsgaremelk\diakmunka\document_db\diakmunkaProjekt\diakmunkaProjekt\bin\Debug\diakmunkaProjekt.exe
+C:\Users\B18\Documents\Bangó Alex vizsgaremelk\diakmunka\document_db\diakmunkaProjekt\diakmunkaProjekt\bin\Debug\diakmunkaProjekt.pdb
+C:\Users\B18\Documents\Bangó Alex vizsgaremelk\diakmunka\document_db\diakmunkaProjekt\diakmunkaProjekt\obj\Debug\diakmunkaProjekt.csprojAssemblyReference.cache
+C:\Users\B18\Documents\Bangó Alex vizsgaremelk\diakmunka\document_db\diakmunkaProjekt\diakmunkaProjekt\obj\Debug\diakmunkaProjekt.csproj.CoreCompileInputs.cache
+C:\Users\B18\Documents\Bangó Alex vizsgaremelk\diakmunka\document_db\diakmunkaProjekt\diakmunkaProjekt\obj\Debug\diakmunkaProjekt.exe
+C:\Users\B18\Documents\Bangó Alex vizsgaremelk\diakmunka\document_db\diakmunkaProjekt\diakmunkaProjekt\obj\Debug\diakmunkaProjekt.pdb
