@@ -260,8 +260,15 @@ export default {
       this.modal.show();
     },
     onClickDelete(id) {
+      let text = "Biztosan Törölni akarja?";
+      if (confirm(text) == true) {
+        text = "Törölve!";
+      }else{
+        text = "Visszavonva!";
+      }
       this.state = "delete";
       this.deleteStudent(id);
+
     },
     onClickEdit(id) {
       this.state = "edit";
