@@ -1,10 +1,9 @@
 
 <template>
-  <div class="row">
+  <div class="row" @dblclick="Properties()">
     <h1 class="felirat">Ready to work</h1>
     <div
       class="col-sm-4 mb-3 mb-sm-12"
-      v-on:dblclick="Properties()"
       v-for="(spe, index) in spes"
       :key="`spe${index}`"
     >
@@ -24,7 +23,7 @@
       aria-labelledby="modalPropertiesModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Properties</h5>
@@ -73,6 +72,13 @@ export default {
   },
   mounted() {
     this.getSPE();
+    this.modal = new bootstrap.Modal(
+      document.getElementById("modalProperties"),
+      {
+        keyboard: false,
+      }
+    );
+    this.form = document.querySelector(".needs-validation");
   },
   methods: {
     async getSPE() {
@@ -86,9 +92,7 @@ export default {
       const response = await fetch(url, config);
       const data = await response.json();
       this.spes = data.data;
-      console.log(spes);
     },
-
     Properties() {
       this.modal.show();
     },

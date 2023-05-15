@@ -75,7 +75,8 @@
             <div class="modal-body">
               <!--#region Form -->
 
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" 
+              >
                 <div class="col-md-12">
                   <label for="name" class="form-label">Student name</label>
                   <input
