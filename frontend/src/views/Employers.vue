@@ -12,7 +12,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(employer, index) in employers" :key="`employer${index}`">
+        <tr v-for="(employer, index) in employers" :key="`employer${index}`"
+         @click="onClickRow(employer.id)">
           
           <td> {{ employer.name }}</td>
           <td> {{ employer.settlement }} </td>

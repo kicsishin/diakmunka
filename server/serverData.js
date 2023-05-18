@@ -1049,6 +1049,17 @@ app.get("/spes", (req, res) => {
   });
 });
 
+function getEverything(res, id) {
+  return new Promise((resolve, reject) => {
+    let sql = `
+    SELECT s.id sid, s.name sname, DATE_FORMAT(s.datetime, '%Y.%m.%e %H:%i:%s') datetime, p.id pid, p.employerid, p.studentid, p.job, p.date, p.hourlyrate, p.numberofhours, p.highschoolstudent, e.id eid, e.name ename, e.settlement FROM students s
+  INNER JOIN projects p on s.id = p.studentid
+  INNER JOIN employers e on p.employerid = e.id
+  where e.id = ?
+    `
+  })
+}
+
 function mySanitizeHtml(data) {
   return sanitizeHtml(data, {
     allowedTags: [],

@@ -1,8 +1,29 @@
 
 <template>
-  <div class="row" @dblclick="Properties()">
-    <h1 class="felirat">Ready to work</h1>
-    <div
+  <div>
+    <h1 class="felirat mb-5">Munkák</h1>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
+      <div class="col" v-for="(spe, index) in spes" :key="`spe${index}`">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ spe.job }}</h5>
+            <p class="card-text">
+              {{ spe.ename }}
+            </p>
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="onClickProperties(spe.pid)"
+            >
+              Részletek
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div
       class="col-sm-4 mb-3 mb-sm-12"
       v-for="(spe, index) in spes"
       :key="`spe${index}`"
@@ -15,7 +36,7 @@
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div
       class="modal fade"
@@ -56,6 +77,7 @@
 </template>
 
 <script>
+import * as bootstrap from "bootstrap";
 import { useUrlStore } from "@/stores/url";
 import { useLoginStore } from "@/stores/login";
 const storeUrl = useUrlStore();
@@ -83,6 +105,7 @@ export default {
   methods: {
     async getSPE() {
       let url = this.storeUrl.urlSPE;
+      console.log(url);
       const config = {
         method: "GET",
         headers: {
@@ -95,6 +118,9 @@ export default {
     },
     Properties() {
       this.modal.show();
+    },
+    onClickProperties(id) {
+      console.log(id);
     },
   },
 };
