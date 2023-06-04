@@ -16,7 +16,8 @@
 -- 
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- 
+--9öó
+    
 -- Set character set the client will use to send SQL statements to the server
 --
 SET NAMES 'utf8';
