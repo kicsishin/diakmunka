@@ -1049,16 +1049,59 @@ app.get("/spes", (req, res) => {
   });
 });
 
-function getEverything(res, id) {
+//getEverything
+app.get("/employers/:id", (req, res) => {
+  const id = req.params.id;
+  let sql = `
+  select * from employers
+  where id = ?
+  `;
+
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      sendingGetError(res, "Server connecting error!");
+      return;
+    }
+    connection.query(sql, [id], async function (error, results, fields) {
+      if (error) {
+        const message = "employers sql error";
+        sendingGetError(res, message);
+        return;
+      }
+      if (results.length == 0) {
+        const message = `Not found id: ${id}`;
+        sendingGetError(res, message);
+        return;
+      }
+      results[0].employers = await getEmployersWithEverything(res, id);
+      sendingGetById(res, null, results, id);
+    });
+    connection.release();
+  });
+});
+
+function getEmployersWithEverything(res, id) {
   return new Promise((resolve, reject) => {
     let sql = `
-    SELECT s.id sid, s.name sname, DATE_FORMAT(s.datetime, '%Y.%m.%e %H:%i:%s') datetime, p.id pid, p.employerid, p.studentid, p.job, p.date, p.hourlyrate, p.numberofhours, p.highschoolstudent, e.id eid, e.name ename, e.settlement FROM students s
+    SELECT e.name ename, e.settlement, p.job, p.date, p.hourlyrate, p.numberofhours, s.name sname FROM students s
   INNER JOIN projects p on s.id = p.studentid
   INNER JOIN employers e on p.employerid = e.id
   where e.id = ?
-    `
+    `;
+    pool.getConnection(function (error, connection) {
+      if (error) {
+        sendingGetError(res, "Server connecting error!");
+        return;
+      }
+  
+      connection.query(sql, [id], async function (error, results, fields) {
+        sendingGet(res, error, results);
+      });
+  
+      connection.release();
+    });
   })
-}
+};
 
 function mySanitizeHtml(data) {
   return sanitizeHtml(data, {

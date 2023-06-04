@@ -12,7 +12,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(employer, index) in employers" :key="`employer${index}`"
+        <tr
+        :class="currentRowBackround(employer.id)"
+         v-for="(employer, index) in employers" :key="`employer${index}`"
          @click="onClickRow(employer.id)">
           
           <td> {{ employer.name }}</td>
@@ -55,7 +57,17 @@ export default {
       const data = await response.json();
       this.employers = data.data;
     },
+    onClickRow(id){
+      console.log(id);
+      this.currentDataId = null;
+      this.currentId = id;
+      this.getEverything(id);
+    },
+    currentRowBackround(id){
+    return this.currentId == id ? "my-bg-current-row" : "";
+    },
   },
+
 };
 </script>
 
